@@ -35,15 +35,15 @@
 <script>
   var socket = io.connect('http://' + location.host);
   socket.on('connect', function (data) {
-    console.log(data);
+		console.log(data);
   });
 
   $('button').on('mouseover', function(el){
-  	socket.emit('switch', {turnOn:this.id});
+		socket.emit('switch', {turnOn:this.id});
   });
 
   $('button').on('mouseleave', function(el){
-  	socket.emit('switch', {turnOff:this.id});
+		socket.emit('switch', {turnOff:this.id});
   });
 </script>
 </html>
