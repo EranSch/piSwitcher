@@ -1,7 +1,13 @@
 var 	app = require('http').createServer(handler),
 			io = require('socket.io').listen(app),
-			fs = require('fs');
+			fs = require('fs'),
+			pfio = require('piface-node');
 
+process.on('SIGINT', function(){
+	pfio.deinit();
+});
+
+pfio.init();
 app.listen(8080);
 
 function handler (req, res) {
@@ -21,5 +27,10 @@ io.sockets.on('connection', function (socket) {
 	socket.emit('connect', { message: 'hello' });
 	socket.on('switch', function(data){
 		console.dir(data);
+		if(data.turnOn){
+			pfio.digital_write(data.turnOn,1);
+		}else{
+			pfio.digital_write(data.turnOff,0);
+		}	
 	});
 });
