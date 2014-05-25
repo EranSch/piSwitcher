@@ -1,0 +1,14 @@
+{
+  "name": "piSwitcher",
+  "version": "0.1",
+  "description": "Websocket interface for Pi face control",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@Swingline0",
+  "license": "Beerware",
+  "dependencies": {
+    "socket.io": "^0.9.17"
+  }
+}

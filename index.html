@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>piSwitcher</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		button{
+			float: left;
+			width: 50vw;
+			height: 25vh;
+		}
+		button:hover,
+		button:focus{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<button id="0">1</button>
+	<button id="1">2</button>
+	<button id="2">3</button>
+	<button id="3">4</button>
+	<button id="4">5</button>
+	<button id="5">6</button>
+	<button id="6">7</button>
+	<button id="7">8</button>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://' + location.host);
+  socket.on('connect', function (data) {
+    console.log(data);
+  });
+
+  $('button').on('mouseover', function(el){
+  	socket.emit('switch', {turnOn:this.id});
+  });
+
+  $('button').on('mouseleave', function(el){
+  	socket.emit('switch', {turnOff:this.id});
+  });
+</script>
+</html>
