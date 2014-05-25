@@ -5,6 +5,7 @@ var 	app = require('http').createServer(handler),
 
 process.on('SIGINT', function(){
 	pfio.deinit();
+	process.exit(0);
 });
 
 pfio.init();
