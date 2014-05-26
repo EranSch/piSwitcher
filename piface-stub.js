@@ -10,5 +10,8 @@ module.exports = {
 	digital_write: function(pin, set){ 
 		outPins[pin] = set;
 		console.dir('PIFACE: Set pin: ' + pin + ' to ' + outPins[pin]); 
+	},
+	read_output: function(pin){
+		return outPins[pin];
 	}
 };

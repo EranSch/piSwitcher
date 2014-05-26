@@ -28,7 +28,18 @@ function handler (req, res) {
 }
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('success', { message: 'Live connection established' });
+	socket.emit('success', { 
+		message: 'Live connection established' 
+	});
+	(function(){
+		var outputPins = [0,0,0,0,0,0,0,0];
+		for (var i = outputPins.length - 1; i >= 0; i--) {
+			outputPins[i] = pfio.read_output(i);
+		}
+		socket.emit('fullStatus', {
+			outputPins: outputPins
+		});
+	})();
 	socket.on('switch', function(data){
 		console.dir(data);
 		pfio.digital_write(data.pin, data.set);

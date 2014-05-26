@@ -130,6 +130,11 @@
   	$('#' + data.id).prop('checked', data.state);
   	toastr.info(data.message);
   });
+  socket.on('fullStatus', function(data){
+  	data.outputPins.forEach(function(pin, index){
+	  	$('#' + index).prop('checked', pin);  		
+  	});
+  });
 
   // Socket.io Emitters
   $('input').on('click', function(el){
