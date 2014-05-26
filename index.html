@@ -138,7 +138,7 @@
   	while (binaryState.length < 8) binaryState = "0" + binaryState;
 
   	// Convert binary number to array, iterate. (Each index == pin)
-  	binaryState.split('').forEach(function(pin, index){
+  	binaryState.split('').reverse().forEach(function(pin, index){
 	  	$('#' + index).prop('checked', Number(pin));
   	});
   });
