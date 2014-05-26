@@ -1,0 +1,26 @@
+{
+  "name": "piSwitcher",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Swingline0/piSwitcher",
+  "authors": [
+    "Eran <me@eran.sh>"
+  ],
+  "description": "PiFace control interface",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "Beerware",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "toastr": "~2.0.3"
+  }
+}
