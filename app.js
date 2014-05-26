@@ -11,7 +11,12 @@ process.on('SIGINT', function(){
 });
 
 pfio.init();
-app.listen(8080);
+
+var port = process.env.PORT || 9000;
+app.listen(port, function(err){
+	if (err) throw err;
+	console.dir('Listening for connections on port ' + port)
+});
 
 function handler (req, res) {
 	console.dir(req.url);
