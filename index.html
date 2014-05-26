@@ -139,5 +139,19 @@
 			set: this.checked
 		});
   });
+
+  // Socket.io Events
+  socket.on('connecting', function (){
+  	toastr.info('Attempting to connect to server');
+  });
+  socket.on('disconnect', function (){
+  	toastr.error('Disconnected from server');
+  });
+  socket.on('connect_failed', function (){
+  	toastr.error('Failed to establish connection');
+  });
+  socket.on('reconnect_failed', function (){
+  	toastr.error('Failed to re-establish connection');
+  });
 </script>
 </html>
