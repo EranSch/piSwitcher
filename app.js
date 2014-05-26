@@ -1,7 +1,9 @@
-var 	app = require('http').createServer(handler),
-			io = require('socket.io').listen(app),
-			fs = require('fs'),
-			pfio = require('piface-node');
+var app = require('http').createServer(handler),
+    io = require('socket.io').listen(app),
+    fs = require('fs');
+
+var pfio = ( process.env.NODE_ENV === 'production' ) ?
+    require('piface-node') : require('./piface-stub');
 
 process.on('SIGINT', function(){
 	pfio.deinit();
