@@ -12,13 +12,14 @@ pfio.init();
 app.listen(8080);
 
 function handler (req, res) {
-	fs.readFile(__dirname + '/index.html',
+	console.dir(req.url);
+	var request = (req.url === '/') ? '/index.html' : req.url;
+	fs.readFile(__dirname + request,
 	function (err, data) {
 		if (err) {
-			res.writeHead(500);
-			return res.end('Error loading index.html');
+			res.writeHead(404);
+			return res.end('File not found');
 		}
-
 		res.writeHead(200);
 		res.end(data);
 	});
