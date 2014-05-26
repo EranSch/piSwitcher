@@ -28,13 +28,16 @@ function handler (req, res) {
 }
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('connect', { message: 'hello' });
+	socket.emit('success', { message: 'Live connection established' });
 	socket.on('switch', function(data){
 		console.dir(data);
 		if(data.turnOn){
 			pfio.digital_write(data.turnOn,1);
+			socket.emit('toast', {message: 'Switch ' + data.turnOn + ' actived.'});
 		}else{
 			pfio.digital_write(data.turnOff,0);
-		}	
+			socket.emit('toast', {message: 'Switch ' + data.turnOff + ' deactived.'});
+		}
 	});
+
 });
