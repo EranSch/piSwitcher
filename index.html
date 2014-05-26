@@ -131,8 +131,15 @@
   	toastr.info(data.message);
   });
   socket.on('fullStatus', function(data){
-  	data.outputPins.forEach(function(pin, index){
-	  	$('#' + index).prop('checked', pin);  		
+  	// Convert the integer to binary
+  	var binaryState = Number(data.outputPins).toString(2);
+
+  	// Add preceding zeros to binary number if they're missing
+  	while (binaryState.length < 8) binaryState = "0" + binaryState;
+
+  	// Convert binary number to array, iterate. (Each index == pin)
+  	binaryState.split('').forEach(function(pin, index){
+	  	$('#' + index).prop('checked', Number(pin));
   	});
   });
 

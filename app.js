@@ -32,10 +32,7 @@ io.sockets.on('connection', function (socket) {
 		message: 'Live connection established' 
 	});
 	(function(){
-		var outputPins = [0,0,0,0,0,0,0,0];
-		for (var i = outputPins.length - 1; i >= 0; i--) {
-			outputPins[i] = pfio.read_output(i);
-		}
+		var outputPins = pfio.read_output();
 		socket.emit('fullStatus', {
 			outputPins: outputPins
 		});
