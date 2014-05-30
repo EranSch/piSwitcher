@@ -129,7 +129,7 @@
   });
   socket.on('setStatus', function(data){
   	$('#' + data.id).prop('checked', data.state);
-  	toastr.info(data.message);
+  	//toastr.info(data.message);
   });
   socket.on('fullStatus', function(data){
   	// Convert the integer to binary
