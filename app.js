@@ -18,21 +18,25 @@ var oscillatorGenerator = function(value){
 
 	function servoControl(){
 		setInterval(function(){
+			console.log(pulse);
 			pfio.digital_write(4, 1);
 			setTimeout(function(){
+				console.log('stop');
 				pfio.digital_write(4, 0);
 			},pulse);
-		},20);
+		},50);
 	}
-
+	
+	pfio.digital_write(5, 1);
 	servoControl();
 
 	return function(newValue){
 		pulse = newValue;
+		console.log('set value to: ' + pulse);
 	};
 };
 
-var osc = oscillatorGenerator(1);
+var osc = oscillatorGenerator(2);
 
 var port = process.env.PORT || 9000;
 app.listen(port, function(err){
