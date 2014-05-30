@@ -12,6 +12,28 @@ process.on('SIGINT', function(){
 
 pfio.init();
 
+var oscillatorGenerator = function(value){
+
+	var pulse = value;
+
+	function servoControl(){
+		setInterval(function(){
+			pfio.digital_write(4, 1);
+			setTimeout(function(){
+				pfio.digital_write(4, 0);
+			},pulse);
+		},20);
+	}
+
+	servoControl();
+
+	return function(newValue){
+		pulse = newValue;
+	};
+};
+
+var osc = oscillatorGenerator(1);
+
 var port = process.env.PORT || 9000;
 app.listen(port, function(err){
 	if (err) throw err;
@@ -35,21 +57,14 @@ function handler (req, res) {
 io.sockets.on('connection', function (socket) {
 	socket.emit('success', { 
 		message: 'Live connection established' 
-	});
-	(function(){
-		var outputPins = pfio.read_output();
-		socket.emit('fullStatus', {
-			outputPins: outputPins
-		});
-	})();
-	socket.on('switch', function(data){
+	});	
+	socket.on('pulse', function(data){
 		console.dir(data);
-		pfio.digital_write(data.pin, data.set);
-		var verb = (data.set === true) ? 'Activated' : 'Deactived';
-		io.sockets.emit('setStatus', {
-			message: 'Output: ' + data.pin + ' ' + verb,
-			id: data.pin,
-			state: data.set
+		
+		osc(data.width);
+		
+		io.sockets.emit('confirmPulse', {
+			width: data.width
 		});
 	});
 });
