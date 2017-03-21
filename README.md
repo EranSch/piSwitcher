@@ -13,7 +13,7 @@ Installation
 5. `node app.js` to launch
 6. Visit http://localhost:9000 to try out
 
-NOTE: By default, the piface will be stubbed so you don't need a Rasppi to test this. To run on a device with a PiFace, run `NODE_ENV=production node app.ks`
+NOTE: By default, the piface will be stubbed so you don't need a Rasppi to test this. To run on a device with a PiFace, run `NODE_ENV=production node app.js`
 
 
 Demo
